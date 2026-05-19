@@ -9,15 +9,15 @@ services:
       TZ: ${TZ:-Asia/Ho_Chi_Minh}
       LLDAP_JWT_SECRET: ${LLDAP_JWT_SECRET:?Set LLDAP_JWT_SECRET in .env}
       LLDAP_KEY_SEED: ${LLDAP_KEY_SEED:?Set LLDAP_KEY_SEED in .env}
-      LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN:-dc=example,dc=com}
-      LLDAP_LDAP_USER_EMAIL: ${LLDAP_LDAP_USER_EMAIL:-admin@example.com}
+      LLDAP_LDAP_BASE_DN: ${LLDAP_LDAP_BASE_DN:-dc=vnpay,dc=vn}
+      LLDAP_LDAP_USER_EMAIL: ${LLDAP_LDAP_USER_EMAIL:-admin@vnpay.vn}
       LLDAP_LDAP_USER_PASS: ${LLDAP_LDAP_USER_PASS:?Set LLDAP_LDAP_USER_PASS in .env}
       LLDAP_HTTP_URL: ${LLDAP_HTTP_URL:-http://localhost:17170}
     ports:
       # Web UI
       - "17170:17170"
       # LDAP: chi mo ra host neu can truy cap tu ngoai Docker.
-      # - "3890:3890"
+      - "3890:3890"
       # LDAPS: chi bat khi da cau hinh certificate.
       # - "6360:6360"
     volumes:

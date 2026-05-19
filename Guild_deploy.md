@@ -57,8 +57,8 @@ GID=1000
 
 LLDAP_JWT_SECRET=REPLACE_WITH_RANDOM_JWT_SECRET
 LLDAP_KEY_SEED=REPLACE_WITH_RANDOM_KEY_SEED
-LLDAP_LDAP_BASE_DN=dc=example,dc=com
-LLDAP_LDAP_USER_EMAIL=admin@example.com
+LLDAP_LDAP_BASE_DN=dc=vnpay,dc=vn
+LLDAP_LDAP_USER_EMAIL=admin@vnpay.vn
 LLDAP_LDAP_USER_PASS=CHANGE_ME_STRONG_PASSWORD
 LLDAP_HTTP_URL=http://localhost:17170
 ```
@@ -67,7 +67,7 @@ Can thay cac gia tri sau:
 
 - `LLDAP_JWT_SECRET`: secret da tao o buoc 3.
 - `LLDAP_KEY_SEED`: secret da tao o buoc 3.
-- `LLDAP_LDAP_BASE_DN`: base DN cua he thong LDAP. Vi du domain `example.com` thi dung `dc=example,dc=com`.
+- `LLDAP_LDAP_BASE_DN`: base DN cua he thong LDAP. Vi du domain `vnpay.vn` thi dung `dc=vnpay,dc=vn`.
 - `LLDAP_LDAP_USER_EMAIL`: email cua admin mac dinh.
 - `LLDAP_LDAP_USER_PASS`: mat khau admin ban dau, toi thieu 8 ky tu.
 - `LLDAP_HTTP_URL`: URL public cua web UI, dac biet quan trong neu dung tinh nang reset password qua email.
@@ -132,15 +132,15 @@ Tai khoan mac dinh:
 
 ## 7. Thong tin LDAP de cau hinh ung dung khac
 
-Voi cau hinh mau `LLDAP_LDAP_BASE_DN=dc=example,dc=com`, cac gia tri hay dung la:
+Voi cau hinh mau `LLDAP_LDAP_BASE_DN=dc=vnpay,dc=vn`, cac gia tri hay dung la:
 
 ```text
 LDAP URL: ldap://lldap:3890
 LDAP URL tu may ngoai Docker: ldap://IP_SERVER:3890
-Base DN: dc=example,dc=com
-Admin bind DN: cn=admin,ou=people,dc=example,dc=com
-People OU: ou=people,dc=example,dc=com
-Groups OU: ou=groups,dc=example,dc=com
+Base DN: dc=vnpay,dc=vn
+Admin bind DN: cn=admin,ou=people,dc=vnpay,dc=vn
+People OU: ou=people,dc=vnpay,dc=vn
+Groups OU: ou=groups,dc=vnpay,dc=vn
 ```
 
 Nen tao mot user rieng de bind cho cac ung dung khac, roi them user do vao group `lldap_strict_readonly` thay vi dung admin.
@@ -148,7 +148,7 @@ Nen tao mot user rieng de bind cho cac ung dung khac, roi them user do vao group
 Vi du filter theo group:
 
 ```text
-(memberOf=cn=app_users,ou=groups,dc=example,dc=com)
+(memberOf=cn=app_users,ou=groups,dc=vnpay,dc=vn)
 ```
 
 ## 8. Bat LDAPS tuy chon
@@ -187,14 +187,14 @@ ldaps://lldap:6360
 Neu dat web UI sau Nginx, Caddy, Traefik hoac proxy khac:
 
 - Chi can proxy HTTP port `17170`.
-- Dat `LLDAP_HTTP_URL` thanh URL public, vi du `https://ldap.example.com`.
+- Dat `LLDAP_HTTP_URL` thanh URL public, vi du `https://ldap.vnpay.vn`.
 - Nen bat HTTPS o reverse proxy.
 - Khong proxy LDAP bang reverse proxy HTTP thong thuong. LDAP port `3890`/`6360` can TCP proxy neu muon public.
 
 Vi du `.env`:
 
 ```env
-LLDAP_HTTP_URL=https://ldap.example.com
+LLDAP_HTTP_URL=https://ldap.vnpay.vn
 ```
 
 ## 10. Backup va restore
