@@ -7,9 +7,9 @@ services:
       HTTP_USER: ${HTTP_USER:?Set HTTP_USER in .env}
       HTTP_PASS: ${HTTP_PASS:?Set HTTP_PASS in .env}
     ports:
-      # DNS service
-      - "53:53/udp"
-      - "53:53/tcp"
+      # DNS service. Bind vao IP LAN de tranh conflict voi systemd-resolved tren 127.0.0.53.
+      - "${DNS_BIND_IP:?Set DNS_BIND_IP in .env}:53:53/udp"
+      - "${DNS_BIND_IP:?Set DNS_BIND_IP in .env}:53:53/tcp"
       # Web UI. Doi thanh "127.0.0.1:5380:8080" neu chi muon truy cap local/tunnel.
       - "5380:8080"
     volumes:
